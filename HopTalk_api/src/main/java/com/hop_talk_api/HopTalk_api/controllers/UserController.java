@@ -1,5 +1,6 @@
 package com.hop_talk_api.HopTalk_api.controllers;
 
+import com.hop_talk_api.HopTalk_api.dto.BasicUserDTO;
 import com.hop_talk_api.HopTalk_api.dto.UserDTO;
 import com.hop_talk_api.HopTalk_api.entities.User;
 import com.hop_talk_api.HopTalk_api.http.AppResponse;
@@ -8,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +21,16 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/users")
+    @GetMapping("/users")
+    public ResponseEntity<?> fetchAllUsers(){
+        List<BasicUserDTO> collection = this.userService.fetchAllUsersForSelection();
+
+        return AppResponse.success()
+                .withData(collection)
+                .build();
+    }
+
+    @PostMapping("/users/register")
     public ResponseEntity<?> createNewUser(@RequestBody User user){
         HashMap<String, Object> response = new HashMap<>();
 
@@ -32,22 +41,31 @@ public class UserController {
         }
 
         return AppResponse.error()
-                .withMessage("User cannot be created")
+                .withMessage("User with the same username exists")
                 .build();
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<?> fetchAllUsers(){
-        List<UserDTO> collection = this.userService.getAllUsers();
+    @PostMapping("/users/login")
+    public ResponseEntity<?> loginUser(@RequestBody HashMap<String, String> credentials){
+        String username = credentials.get("username");
+        String password = credentials.get("password");
 
-        return AppResponse.success()
-                .withData(collection)
+        UserDTO user = this.userService.getUserByUsernameAndPassword(username,password);
+        if(user != null){
+            return  AppResponse.success()
+                    .withDataAsArray(user)
+                    .withMessage("Login successful")
+                    .build();
+        }
+
+        return AppResponse.error()
+                .withMessage("Invalid username or password")
                 .build();
     }
 
     @GetMapping("/users/{username}")
-    public ResponseEntity<?> fetchSingleUserByUsername(@PathVariable String username){
-        UserDTO responseUser = this.userService.getUserByUsername(username);
+    public ResponseEntity<?> fetchBasicUserInfoByUsername(@PathVariable String username){
+        BasicUserDTO responseUser = this.userService.fetchBasicUserDataByUsername(username);
 
         if(responseUser != null){
             return AppResponse.success()

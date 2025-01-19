@@ -1,23 +1,18 @@
 package com.hop_talk_api.HopTalk_api.dto;
 
+import java.util.List;
+
 public class UserDTO {
 
-    private int id;
     private String username;
     private String iconUrl;
+    private List<BasicUserDTO> friendsList;
+    //friends, direct and group channels
 
-    public UserDTO(int id, String username, String iconUrl){
-        this.id = id;
+    public UserDTO(String username, String iconUrl, List<BasicUserDTO> friendsList){
         this.username = username;
         this.iconUrl = iconUrl;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.friendsList = friendsList;
     }
 
     public String getUsername() {

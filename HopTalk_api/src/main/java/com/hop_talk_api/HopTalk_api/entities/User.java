@@ -35,7 +35,7 @@ public class User {
     @Column(name = "is_active")
     private boolean isActive = true;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_friends",
             joinColumns = @JoinColumn(name = "user_id"),
