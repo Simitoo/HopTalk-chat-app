@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/users/register")
-    public ResponseEntity<?> createNewUser(@RequestBody User user){
+    public ResponseEntity<?> registerNewUser(@RequestBody User user){
         HashMap<String, Object> response = new HashMap<>();
 
         if(this.userService.createUser(user)){

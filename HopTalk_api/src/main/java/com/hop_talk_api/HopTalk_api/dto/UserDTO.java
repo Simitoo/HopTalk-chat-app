@@ -30,4 +30,12 @@ public class UserDTO {
     public void setIconUrl(String iconUrl) {
         this.iconUrl = iconUrl;
     }
+
+    public List<BasicUserDTO> getFriendsList() {
+        return friendsList;
+    }
+
+    public void setFriendsList(List<BasicUserDTO> friendsList) {
+        this.friendsList = friendsList;
+    }
 }

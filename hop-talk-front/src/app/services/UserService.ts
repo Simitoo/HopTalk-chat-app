@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { enviroment } from "../environments/environment";
+import { Observable } from "rxjs";
+import { UserType } from "../models/user.model";
 
 @Injectable({
     providedIn: "root"
@@ -8,13 +10,16 @@ import { enviroment } from "../environments/environment";
 export class UserService{
 
     private httpClient = inject(HttpClient);
-    private baseUrl = `${enviroment.baseUrl}/users`;
+    private baseUrl = enviroment.baseUrl;
 
-    public getAllUsers(){
-        return this.httpClient.get(this.baseUrl);
+    constructor(private http: HttpClient){}
+
+    login(username: string, password: string) {
+        const credentials = {username, password};
+        return this.http.post<UserType>(`${this.baseUrl}/users/login`, credentials);
     }
 
-    public getUserByUsername($username: string){
-        
+    register(user: UserType): Observable<any>{
+        return this.http.post<any>(`${this.baseUrl}/users/register`, user);
     }
 }
