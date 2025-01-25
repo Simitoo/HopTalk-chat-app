@@ -11,7 +11,7 @@ import { CommonModule } from "@angular/common";
     standalone: true,
     imports: [FormsModule, CommonModule],
 })
-export class LoginPage {
+export class LoginComponent {
     username: string = '';
     password: string = '';
     errorMessage: string = '';

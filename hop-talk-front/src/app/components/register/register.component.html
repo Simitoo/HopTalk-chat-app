@@ -1,0 +1,16 @@
+<div class="register-form">
+  <h2>Register</h2>
+
+  <form (ngSubmit)="onRegister()">
+      <label for="username">Username:</label>
+      <input type="text" id="username" [(ngModel)]="userData.username" name="username" required />
+
+      <label for="password">Password:</label>
+      <input type="text" id="password" [(ngModel)]="userData.password" name="password" required />
+
+      <label>Profile Picture:</label>
+      <app-file (imageUploaded)="onFileSelected($event)"></app-file>
+      
+      <button type="submit" [disabled]="isUploading">Register</button>
+  </form>
+</div>

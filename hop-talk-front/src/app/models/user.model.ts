@@ -1,7 +1,8 @@
 export type UserType = {
     id?: number;
     username: string;
-    iconUrl: string;
+    password: string;
+    iconUrl?: string;
     friendsList?: UserType[];
     // direct and group channels 
 }

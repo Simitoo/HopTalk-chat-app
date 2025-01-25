@@ -4,15 +4,25 @@ import java.util.List;
 
 public class UserDTO {
 
+    private int id;
     private String username;
     private String iconUrl;
     private List<BasicUserDTO> friendsList;
     //friends, direct and group channels
 
-    public UserDTO(String username, String iconUrl, List<BasicUserDTO> friendsList){
+    public UserDTO(int id, String username, String iconUrl, List<BasicUserDTO> friendsList){
+        this.id = id;
         this.username = username;
         this.iconUrl = iconUrl;
         this.friendsList = friendsList;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

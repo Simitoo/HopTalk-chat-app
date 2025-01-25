@@ -36,13 +36,17 @@ public class UserService {
 
         User user = this.userRepository.findUserByUsername(username);
 
+        if(!user.getIsActive()){
+            return null;
+        }
+
         return createBasicUserDto(user);
     }
 
-    public UserDTO getUserByUsernameAndPassword(String username, String password){
+    public UserDTO getUserDataByUsernameAndPassword(String username, String password){
 
         User user = this.userRepository.findUserByUsername(username);
-        if(user != null && user.getPassword().equals(password)){
+        if(user != null && user.getPassword().equals(password) && user.getIsActive()){
             return createUserDto(user);
         }
 
@@ -50,12 +54,29 @@ public class UserService {
     }
 
     public boolean updateUser(User user){
-        this.userRepository.save(user);
+        User existingUser = getUserById(user.getId());
+        System.out.println("Received user: " + user);
+        System.out.println("Received icon_url: " + user.getIconUrl());
+
+        if(existingUser == null){
+            return false;
+        }
+
+        if(!existingUser.getUsername().equals(user.getUsername())){
+            if(this.userRepository.findUserByUsername(user.getUsername()) != null){
+                throw new IllegalArgumentException("Username already taken");
+            }
+
+            existingUser.setUsername(user.getUsername());
+        }
+
+        existingUser.setIconUrl(user.getIconUrl());
+        this.userRepository.save(existingUser);
         return true;
     }
 
-    public boolean removeUser(int id){
-        User userToRemove = getUserById(id);
+    public boolean removeUser(int userId){
+        User userToRemove = getUserById(userId);
         if(userToRemove != null){
             userToRemove.setIsActive(false);
             this.userRepository.save(userToRemove);
@@ -66,20 +87,45 @@ public class UserService {
     }
 
     public boolean addUserToFriendsList(String userUsername, String friendUsername){
+
+        if (userUsername.equals(friendUsername)) {
+            throw new IllegalArgumentException("A user cannot add themselves as a friend.");
+        }
+
         User user = this.userRepository.findUserByUsername(userUsername);
         User friend = this.userRepository.findUserByUsername(friendUsername);
 
         if(user != null && friend != null){
-            user.getFriendsList().add(friend);
-            friend.getFriendsList().add(user);
+            user.getFriends().add(friend);
+            friend.getFriends().add(user);
+            this.userRepository.save(user);
+            this.userRepository.save(friend);
             return true;
         }
 
         return false;
     }
 
-    public List<BasicUserDTO> fetchFriendsList(int userId){
-        return null;
+    public boolean removeFriendFromFriendsList(String username, String friendUsername){
+
+        if (username.equals(friendUsername)) {
+            throw new IllegalArgumentException("A user cannot remove themselves as a friend.");
+        }
+
+        User user = this.userRepository.findUserByUsername(username);
+        User friend = this.userRepository.findUserByUsername(friendUsername);
+
+        if(user != null && friend != null){
+            user.getFriends().remove(friend);
+            friend.getFriends().remove(user);
+
+            this.userRepository.save(user);
+            this.userRepository.save(friend);
+
+            return true;
+        }
+
+        return false;
     }
 
     private User getUserById(int id){
@@ -87,7 +133,7 @@ public class UserService {
     }
 
     private UserDTO createUserDto(User user){
-        return new UserDTO(user.getUsername(), user.getIconUrl(), user.getFriendsList().stream()
+        return new UserDTO(user.getId(), user.getUsername(), user.getIconUrl(), user.getFriends().stream()
                 .map(friend -> new BasicUserDTO(friend.getUsername(), friend.getIconUrl()))
                 .toList());
     }
@@ -95,5 +141,4 @@ public class UserService {
     private BasicUserDTO createBasicUserDto(User user){
         return new BasicUserDTO(user.getUsername(), user.getIconUrl());
     }
-
 }

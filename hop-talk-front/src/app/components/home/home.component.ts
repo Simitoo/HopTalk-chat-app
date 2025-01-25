@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
     standalone: true,
     imports: [CommonModule]
 })
-export class HomePage{
+export class HomeComponent{
     constructor(private router: Router) {}
 
     goToLogin(){

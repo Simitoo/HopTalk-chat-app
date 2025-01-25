@@ -1,19 +1,14 @@
 package com.hop_talk_api.HopTalk_api.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
-@NoArgsConstructor
 public class User {
 
     @Id
@@ -41,13 +36,23 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
-    private List<User> friendsList = new ArrayList<>();
+    private Set<User> friends;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<DirectChannel> directChannels = new ArrayList<>();
+    @OneToMany(mappedBy = "creator")
+    private List<GroupChannel> createdGroupChannels;
 
-    //collection of direct channels and group channels
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id; // Compare based on ID
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id); // Generate hash based on ID
+    }
 
     public int getId() {
         return id;
@@ -97,19 +102,19 @@ public class User {
         isActive = active;
     }
 
-    public List<User> getFriendsList() {
-        return friendsList;
+    public Set<User> getFriends() {
+        return friends;
     }
 
-    public void setFriendsList(List<User> friendsList) {
-        this.friendsList = friendsList;
+    public void setFriends(Set<User> friends) {
+        this.friends = friends;
     }
 
-    public List<DirectChannel> getDirectChannels() {
-        return directChannels;
+    public List<GroupChannel> getCreatedGroupChannels() {
+        return createdGroupChannels;
     }
 
-    public void setDirectChannels(List<DirectChannel> directChannels) {
-        this.directChannels = directChannels;
+    public void setCreatedGroupChannels(List<GroupChannel> createdGroupChannels) {
+        this.createdGroupChannels = createdGroupChannels;
     }
 }

@@ -2,11 +2,11 @@ package com.hop_talk_api.HopTalk_api.dto;
 
 public class BasicUserDTO {
     private String username;
-    private String icon_url;
+    private String iconUrl;
 
-    public BasicUserDTO(String username, String icon_url){
+    public BasicUserDTO(String username, String iconUrl){
         this.username = username;
-        this.icon_url = icon_url;
+        this.iconUrl = iconUrl;
     }
 
     public String getUsername() {
@@ -17,11 +17,11 @@ public class BasicUserDTO {
         this.username = username;
     }
 
-    public String getIcon_url() {
-        return icon_url;
+    public String getIconUrl() {
+        return iconUrl;
     }
 
-    public void setIcon_url(String icon_url) {
-        this.icon_url = icon_url;
+    public void setIconUrl(String icon_url) {
+        this.iconUrl = icon_url;
     }
 }

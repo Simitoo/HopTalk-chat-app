@@ -32,7 +32,6 @@ public class UserController {
 
     @PostMapping("/users/register")
     public ResponseEntity<?> registerNewUser(@RequestBody User user){
-        HashMap<String, Object> response = new HashMap<>();
 
         if(this.userService.createUser(user)){
             return AppResponse.success()
@@ -50,7 +49,7 @@ public class UserController {
         String username = credentials.get("username");
         String password = credentials.get("password");
 
-        UserDTO user = this.userService.getUserByUsernameAndPassword(username,password);
+        UserDTO user = this.userService.getUserDataByUsernameAndPassword(username,password);
         if(user != null){
             return  AppResponse.success()
                     .withDataAsArray(user)
@@ -77,4 +76,59 @@ public class UserController {
                 .withMessage("User data is not found")
                 .build();
     }
+
+    @PutMapping("/users")
+    public ResponseEntity<?> updateUserInfo(@RequestBody User user){
+        System.out.println("Received user: " + user);
+        if(this.userService.updateUser(user)){
+            return AppResponse.success()
+                    .withMessage("User is updated!")
+                    .build();
+        }
+
+        return AppResponse.error()
+                .withMessage("Such user doesn't exist! Go and create one!")
+                .build();
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<?> removeUser(@PathVariable int id){
+        if(this.userService.removeUser(id)){
+            return AppResponse.success()
+                    .withMessage("User is gone :(")
+                    .build();
+        }
+
+        return AppResponse.error()
+                .withMessage("Such user doesn't exist!")
+                .build();
+    }
+
+    @PostMapping("/users/{username}/friends")
+    public ResponseEntity<?> addFriendToUsersFriendsList(@PathVariable String username, @RequestBody BasicUserDTO friendUsername ){
+        if(this.userService.addUserToFriendsList(username, friendUsername.getUsername())){
+            return AppResponse.success()
+                    .withMessage("Friend added successfully.")
+                    .build();
+
+        }
+        return AppResponse.error()
+                .withMessage("Failed to add friend. Either user or friend doesn't exist.")
+                .build();
+    }
+
+    @DeleteMapping("/users/{username}/friends")
+    public ResponseEntity<?> removeFriendFromFriendsList(@PathVariable String username, @RequestParam String friendUsername){
+        if(this.userService.removeFriendFromFriendsList(username, friendUsername)){
+            return AppResponse.success()
+                    .withMessage("Friend is removed!")
+                    .build();
+        }
+
+        return AppResponse.error()
+                .withMessage("Failed to remove friend. Either user or friend doesn't exist.")
+                .build();
+    }
+
+
 }
