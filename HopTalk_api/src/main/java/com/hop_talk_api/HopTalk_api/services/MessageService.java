@@ -3,8 +3,6 @@ package com.hop_talk_api.HopTalk_api.services;
 import com.hop_talk_api.HopTalk_api.dto.MessageDTO;
 import com.hop_talk_api.HopTalk_api.entities.Message;
 import com.hop_talk_api.HopTalk_api.repositories.MessageRepo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -41,16 +39,16 @@ public class MessageService {
                 .toList();
     }
 
-    public boolean deleteMessage(int id){
-        Message messageToRemove = this.messageRepository.findMessageById(id);
-        if(messageToRemove != null){
-            messageToRemove.setActive(false);
-            this.messageRepository.save(messageToRemove);
-            return true;
-        }
-
-        return false;
-    }
+//    public boolean deleteMessage(int id){
+//        Message messageToRemove = this.messageRepository.findMessageById(id);
+//        if(messageToRemove != null){
+//            messageToRemove.setActive(false);
+//            this.messageRepository.save(messageToRemove);
+//            return true;
+//        }
+//
+//        return false;
+//    }
 
     private MessageDTO createMessageDTO(Message message){
         return new MessageDTO(

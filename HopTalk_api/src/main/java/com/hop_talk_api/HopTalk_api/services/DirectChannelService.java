@@ -40,6 +40,10 @@ public class DirectChannelService {
                 .toList();
     }
 
+    public boolean removeDirectChannel(int directChannelId){
+        return false;
+    }
+
     private DirectChannelDTO createDirectChannelDto(DirectChannel directChannel){
         return new DirectChannelDTO(directChannel, directChannel.getUser());
     }

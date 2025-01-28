@@ -41,19 +41,6 @@ public class User {
     @OneToMany(mappedBy = "creator")
     private List<GroupChannel> createdGroupChannels;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id; // Compare based on ID
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id); // Generate hash based on ID
-    }
-
     public int getId() {
         return id;
     }
@@ -116,5 +103,18 @@ public class User {
 
     public void setCreatedGroupChannels(List<GroupChannel> createdGroupChannels) {
         this.createdGroupChannels = createdGroupChannels;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id; // Compare based on ID
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id); // Generate hash based on ID
     }
 }

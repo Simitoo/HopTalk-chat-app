@@ -3,7 +3,8 @@ package com.hop_talk_api.HopTalk_api.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "group_channels")
@@ -24,13 +25,13 @@ public class GroupChannel {
     private User creator;
 
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean isActive = true;
 
     @OneToMany(mappedBy = "groupChannel")
-    private Set<ChannelParticipant> participants;
+    private List<ChannelParticipant> participants = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -80,11 +81,16 @@ public class GroupChannel {
         isActive = active;
     }
 
-    public Set<ChannelParticipant> getParticipants() {
+    public List<ChannelParticipant> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(Set<ChannelParticipant> participants) {
+    public void setParticipants(List<ChannelParticipant> participants) {
         this.participants = participants;
+    }
+
+    public void addParticipant(ChannelParticipant participant) {
+        this.participants.add(participant);
+        participant.setGroupChannel(this);
     }
 }

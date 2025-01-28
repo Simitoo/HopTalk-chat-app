@@ -6,10 +6,7 @@ import com.hop_talk_api.HopTalk_api.http.AppResponse;
 import com.hop_talk_api.HopTalk_api.services.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,14 +35,19 @@ public class MessageController {
     @GetMapping("/messages/direct/{receiverId}")
     public ResponseEntity<?> getDirectMessages(@PathVariable int receiverId){
         List<MessageDTO> messages = this.messageService.fetchAllForDirectChannel(receiverId);
-        if(messages != null){
-            return AppResponse.success()
-                    .withData(messages)
-                    .build();
-        }
 
-        return AppResponse.error()
-                .withMessage("There aren't any messages for this channel")
+        return AppResponse.success()
+                .withData(messages)
                 .build();
     }
+
+    @GetMapping("/messages/channel/{receiverId}")
+    public ResponseEntity<?> getGroupMessages(@PathVariable int receiverId){
+        List<MessageDTO> messages = this.messageService.fetchAllForGroupChannel(receiverId);
+
+        return AppResponse.success()
+                .withData(messages)
+                .build();
+    }
+
 }

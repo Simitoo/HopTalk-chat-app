@@ -35,14 +35,9 @@ public class DirectChannelController {
     @GetMapping("/direct/{username}")
     public ResponseEntity<?> getAllForCurrentUser(@PathVariable String username){
         List<DirectChannelDTO> directChannels = this.directChannelService.fetchAllForCurrUser(username);
-        if(directChannels != null){
-            return AppResponse.success()
-                    .withData(directChannels)
-                    .build();
-        }
 
-        return AppResponse.error()
-                .withMessage("The user don't have any direct channels")
+        return AppResponse.success()
+                .withData(directChannels)
                 .build();
     }
 }

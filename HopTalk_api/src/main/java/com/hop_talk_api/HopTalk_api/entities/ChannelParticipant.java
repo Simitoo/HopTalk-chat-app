@@ -21,7 +21,7 @@ public class ChannelParticipant {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ChannelParticipantRole role;
+    private ChannelParticipantRole role = ChannelParticipantRole.PARTICIPANT;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive = true;

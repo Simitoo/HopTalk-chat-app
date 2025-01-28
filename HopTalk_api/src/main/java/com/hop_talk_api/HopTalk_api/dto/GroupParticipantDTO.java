@@ -1,19 +1,18 @@
 package com.hop_talk_api.HopTalk_api.dto;
 
-import java.util.List;
+import com.hop_talk_api.HopTalk_api.constants.ChannelParticipantRole;
 
-public class UserDTO {
-
+public class GroupParticipantDTO {
     private int id;
     private String username;
     private String iconUrl;
-    private List<BasicUserDTO> friendsList;
+    private ChannelParticipantRole role;
 
-    public UserDTO(int id, String username, String iconUrl, List<BasicUserDTO> friendsList){
+    public GroupParticipantDTO(int id, String username, String iconUrl, ChannelParticipantRole role){
         this.id = id;
         this.username = username;
         this.iconUrl = iconUrl;
-        this.friendsList = friendsList;
+        this.role = role;
     }
 
     public int getId() {
@@ -40,11 +39,11 @@ public class UserDTO {
         this.iconUrl = iconUrl;
     }
 
-    public List<BasicUserDTO> getFriendsList() {
-        return friendsList;
+    public ChannelParticipantRole getRole() {
+        return role;
     }
 
-    public void setFriendsList(List<BasicUserDTO> friendsList) {
-        this.friendsList = friendsList;
+    public void setRole(ChannelParticipantRole role) {
+        this.role = role;
     }
 }

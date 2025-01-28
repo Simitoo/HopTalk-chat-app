@@ -55,8 +55,6 @@ public class UserService {
 
     public boolean updateUser(User user){
         User existingUser = getUserById(user.getId());
-        System.out.println("Received user: " + user);
-        System.out.println("Received icon_url: " + user.getIconUrl());
 
         if(existingUser == null){
             return false;
@@ -128,7 +126,7 @@ public class UserService {
         return false;
     }
 
-    private User getUserById(int id){
+    public User getUserById(int id){
         return this.userRepository.findById(id);
     }
 

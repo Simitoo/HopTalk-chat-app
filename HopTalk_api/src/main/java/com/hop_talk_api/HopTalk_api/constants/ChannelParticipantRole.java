@@ -6,5 +6,5 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public enum ChannelParticipantRole {
     OWNER,
     ADMIN,
-    PARTICIPANT,
+    PARTICIPANT
 }
