@@ -67,7 +67,7 @@ public class UserController {
         UserDTO user = this.userService.getUserDataByUsernameAndPassword(username,password);
         if(user != null){
             return  AppResponse.success()
-                    .withDataAsArray(user)
+                    .withData(user)
                     .withMessage("Login successful")
                     .build();
         }

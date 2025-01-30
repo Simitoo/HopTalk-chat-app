@@ -1,4 +1,4 @@
-export const enviroment = {
+export const environment = {
     baseUrl: "http://localhost:8118",
     cloudinaryUploadUrl: 'https://api.cloudinary.com/v1_1/dies1hdbq/image/upload',
     cloudinaryPreset: 'profile_pictures',

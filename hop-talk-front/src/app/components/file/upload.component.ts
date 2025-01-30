@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { enviroment } from "../../environments/environment";
+import { environment } from "../../environments/environment";
 
 @Component({
     selector: 'app-file',
@@ -10,7 +10,7 @@ import { enviroment } from "../../environments/environment";
     styleUrl: 'upload.component.css',
 })
 export class FileUploadComponent {
-    previewUrl: string = enviroment.defaultIconUrl;
+    previewUrl: string = environment.defaultIconUrl;
     @Output() imageUploaded = new EventEmitter<File>();
 
     onFileSelected(event: any): void {

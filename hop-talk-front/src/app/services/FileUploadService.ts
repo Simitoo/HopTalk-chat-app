@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { enviroment } from "../environments/environment";
+import { environment } from "../environments/environment";
 import { Observable, throwError } from "rxjs";
 import { Injectable } from "@angular/core";
 
@@ -7,8 +7,8 @@ import { Injectable } from "@angular/core";
     providedIn: 'root'
 })
 export class FileUploadService {
-    cloudinaryUrl: string = enviroment.cloudinaryUploadUrl;
-    cloudinaryPreset: string = enviroment.cloudinaryPreset;
+    cloudinaryUrl: string = environment.cloudinaryUploadUrl;
+    cloudinaryPreset: string = environment.cloudinaryPreset;
 
     constructor(private http: HttpClient) {}
 

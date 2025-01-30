@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { enviroment } from "../../environments/environment";
+import { environment } from "../../environments/environment";
 import { UserService } from "../../services/UserService";
 import { Router } from "@angular/router";
 import { UserType } from "../../models/user.model";
@@ -21,7 +21,7 @@ export class RegisterComponent {
     userData: UserType = {
         username: '',
         password: '',
-        iconUrl: enviroment.defaultIconUrl,
+        iconUrl: environment.defaultIconUrl,
     };
 
     constructor(private userService: UserService, private fileUploadService: FileUploadService, private router: Router) {}

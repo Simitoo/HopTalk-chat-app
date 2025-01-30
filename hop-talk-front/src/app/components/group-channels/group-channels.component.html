@@ -1,0 +1,7 @@
+<h3 class="group-channels-title">Group Channels</h3>
+<ul class="group-channel-list">
+    <li *ngFor="let channel of groupChannels">
+        <img [src]="channel.iconUrl" alt="{{channel.title}}" class="channel-icon">
+        <span>{{ channel.title }}</span>
+    </li>
+</ul>

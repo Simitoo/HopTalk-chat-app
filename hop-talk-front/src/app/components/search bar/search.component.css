@@ -1,7 +1,9 @@
 input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #c035f3;
+    color: plum;
+    background-color: #1c0a47;
     border-radius: 5px;
     margin-bottom: 10px;
 }

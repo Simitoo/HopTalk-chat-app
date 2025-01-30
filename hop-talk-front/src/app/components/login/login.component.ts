@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { UserService } from "../../services/UserService";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import { UserType } from "../../models/user.model";
+import { UserResponse } from "../../models/user-response";
 import { CommonModule } from "@angular/common";
 
 @Component({
@@ -20,9 +20,9 @@ export class LoginComponent {
 
     onLogin(){
        this.userService.login(this.username, this.password).subscribe({
-            next: (user: UserType) => {
-                console.log('Login successful:', user);
-                localStorage.setItem('currentUser', JSON.stringify(user));
+            next: (response: UserResponse) => {
+                console.log('Login successful:', response.data);
+                localStorage.setItem('currentUser', JSON.stringify(response.data));
                 this.router.navigate(['/user']);
             },
             error: (err) => {

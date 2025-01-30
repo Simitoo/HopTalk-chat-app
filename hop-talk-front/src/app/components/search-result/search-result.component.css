@@ -9,7 +9,7 @@
 
 .search-item {
     display: flex;
-    flex-direction: column; 
+    flex-direction: row; 
     align-items: center;
     background-color: #3e12a7;
     padding: 15px;
@@ -45,5 +45,5 @@
 }
 
 .search-result-buttons button:hover {
-    background-color: #5c1be0;
+    background-color: #c035f3;
 }
