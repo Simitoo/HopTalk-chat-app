@@ -2,6 +2,7 @@ package com.hop_talk_api.HopTalk_api.dto;
 
 import com.hop_talk_api.HopTalk_api.entities.GroupChannel;
 
+import java.util.List;
 import java.util.Set;
 
 public class GroupChannelDTO {
@@ -10,9 +11,9 @@ public class GroupChannelDTO {
     private String title;
     private int creatorId;
     private String iconUrl;
-    private Set<GroupParticipantDTO> participants;
+    private List<GroupParticipantDTO> participants;
 
-    public GroupChannelDTO(int id, String title, int creatorId, String iconUrl, Set<GroupParticipantDTO> participants){
+    public GroupChannelDTO(int id, String title, int creatorId, String iconUrl, List<GroupParticipantDTO> participants){
         this.id = id;
         this.title = title;
         this.creatorId = creatorId;
@@ -52,11 +53,11 @@ public class GroupChannelDTO {
         this.iconUrl = iconUrl;
     }
 
-    public Set<GroupParticipantDTO> getParticipants() {
+    public List<GroupParticipantDTO> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(Set<GroupParticipantDTO> participants) {
+    public void setParticipants(List<GroupParticipantDTO> participants) {
         this.participants = participants;
     }
 }

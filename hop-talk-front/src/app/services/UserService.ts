@@ -22,4 +22,8 @@ export class UserService{
     register(user: UserType): Observable<any>{
         return this.http.post<any>(`${this.baseUrl}/users/register`, user);
     }
+
+    searchUsers(username: string): Observable<any> {
+        return this.http.get<any>(`${this.baseUrl}/users/search?username=${username}`);
+    }
 }

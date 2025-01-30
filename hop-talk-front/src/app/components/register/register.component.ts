@@ -53,7 +53,7 @@ export class RegisterComponent {
             next: (response) => {
                 console.log('User registered successfully', response);
                 localStorage.setItem('currentUser', JSON.stringify(this.userData));
-                this.router.navigate(['']);
+                this.router.navigate(['/user']);
             },
             error: (err) => {
                 console.error('Error registering user', err);

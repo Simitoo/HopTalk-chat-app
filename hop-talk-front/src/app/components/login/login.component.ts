@@ -23,7 +23,7 @@ export class LoginComponent {
             next: (user: UserType) => {
                 console.log('Login successful:', user);
                 localStorage.setItem('currentUser', JSON.stringify(user));
-                this.router.navigate(['']);
+                this.router.navigate(['/user']);
             },
             error: (err) => {
                 this.errorMessage = 'Invalid username or password';

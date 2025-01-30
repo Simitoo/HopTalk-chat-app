@@ -30,6 +30,21 @@ public class UserController {
                 .build();
     }
 
+    @GetMapping("/users/search")
+    public ResponseEntity<?> searchUsersByUsername(@RequestParam String username){
+        List<BasicUserDTO> users = this.userService.searchUsersByUsername(username);
+
+        if(users != null){
+            return AppResponse.success()
+                    .withData(users)
+                    .build();
+        }
+
+        return AppResponse.error()
+                .withMessage("No users found")
+                .build();
+    }
+
     @PostMapping("/users/register")
     public ResponseEntity<?> registerNewUser(@RequestBody User user){
 

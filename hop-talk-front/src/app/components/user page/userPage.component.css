@@ -1,0 +1,60 @@
+.user-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 20px;
+}
+
+.left-panel,
+.right-panel {
+    width: 250px;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.left-panel {
+  background-color: #4a12cd;
+}
+
+.right-panel {
+  background-color: #2c0c76;
+}
+
+.middle-panel {
+  flex-grow: 1;
+  border-radius: 8px;
+  background-color: #3e12a7;
+  padding: 20px;
+}
+
+.search-bar-container {
+  background-color: #2c0c76;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #343337;
+  background-color: #1a0c3d;
+}
+
+.channels-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.group-channels,
+.direct-channels {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.group-channels {
+    background-color: #2c0c76;
+}

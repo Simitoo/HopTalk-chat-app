@@ -1,0 +1,12 @@
+<div class="search-results" *ngIf="searchResults.length > 0">
+    <div *ngFor="let user of searchResults" class="search-item">
+        <img [src]="user.iconUrl" alt="User Icon" class="user-icon" />
+        <span>{{ user.username }}</span>
+        <!-- <button (click)="addFriend(user)">Add Friend</button>
+        <button (click)="addToGroup(user)">Add to Group</button> -->
+    </div>
+    <div class="search-result-buttons">
+        <button >Add to Friends</button>
+        <button >Add to Group</button>
+    </div>
+</div>

@@ -1,13 +1,15 @@
 package com.hop_talk_api.HopTalk_api.services;
 
 import com.hop_talk_api.HopTalk_api.dto.BasicGroupChannelDTO;
-import com.hop_talk_api.HopTalk_api.dto.BasicUserDTO;
 import com.hop_talk_api.HopTalk_api.dto.GroupChannelDTO;
+import com.hop_talk_api.HopTalk_api.dto.GroupParticipantDTO;
 import com.hop_talk_api.HopTalk_api.entities.ChannelParticipant;
 import com.hop_talk_api.HopTalk_api.entities.GroupChannel;
 import com.hop_talk_api.HopTalk_api.entities.User;
 import com.hop_talk_api.HopTalk_api.repositories.GroupChannelRepo;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GroupChannelService {
@@ -28,6 +30,13 @@ public class GroupChannelService {
         ChannelParticipant participant = this.channelParticipantService.AddOwnerToChannelParticipants(newChannel);
         newChannel.addParticipant(participant);
         return true;
+    }
+
+    public List<GroupChannelDTO> fetchAllGroupsByUserId(int userId){
+
+        return this.channelParticipantService.getAllGroupsByUserId(userId)
+                .stream().map(this::createGroupDto)
+                .toList();
     }
 
     public boolean addParticipant(int userId, int channelId, int participantId){
@@ -108,6 +117,12 @@ public class GroupChannelService {
         this.groupChannelRepository.save(groupChannel);
 
         return groupChannel;
+    }
+
+    private GroupChannelDTO createGroupDto(GroupChannel channel){
+        return new GroupChannelDTO(channel.getId(), channel.getTitle(), channel.getCreator().getId(), channel.getIconUrl(), channel.getParticipants().stream()
+                .map(participant -> new GroupParticipantDTO(participant.getId(), participant.getUser().getUsername(), participant.getUser().getIconUrl(), participant.getRole()))
+                .toList());
     }
 
 }

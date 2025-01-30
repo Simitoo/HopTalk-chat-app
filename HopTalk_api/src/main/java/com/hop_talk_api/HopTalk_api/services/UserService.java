@@ -32,6 +32,12 @@ public class UserService {
                 .toList();
     }
 
+    public List<BasicUserDTO> searchUsersByUsername(String username) {
+        return this.userRepository.findByUsernameAndIsActive(username, true)
+                .stream().map(this::createBasicUserDto)
+                .toList();
+    }
+
     public BasicUserDTO fetchBasicUserDataByUsername(String username){
 
         User user = this.userRepository.findUserByUsername(username);

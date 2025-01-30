@@ -1,0 +1,5 @@
+<div class="search-bar-container">
+    <input [(ngModel)]="username" (ngModelChange)="onSearch()" placeholder="Search for a user" />
+    <app-search-result [searchResults]="searchResults"></app-search-result>
+
+</div>

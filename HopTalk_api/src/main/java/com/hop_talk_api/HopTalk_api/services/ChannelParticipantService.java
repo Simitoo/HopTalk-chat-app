@@ -7,6 +7,8 @@ import com.hop_talk_api.HopTalk_api.entities.User;
 import com.hop_talk_api.HopTalk_api.repositories.ChannelParticipantRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ChannelParticipantService {
 
@@ -90,5 +92,9 @@ public class ChannelParticipantService {
         }
 
         return participant.getRole() == ChannelParticipantRole.OWNER || participant.getRole() == ChannelParticipantRole.ADMIN;
+    }
+
+    public List<GroupChannel> getAllGroupsByUserId(int userId){
+        return this.channelParticipantRepository.findGroupChannelByUserId(userId);
     }
 }

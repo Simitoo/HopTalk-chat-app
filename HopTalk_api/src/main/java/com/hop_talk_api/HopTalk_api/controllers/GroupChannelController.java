@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class GroupChannelController {
 
@@ -33,6 +35,21 @@ public class GroupChannelController {
 
         return AppResponse.error()
                 .withMessage("Failed to create group channel.")
+                .build();
+    }
+
+    @GetMapping("/groups/{userId}")
+    public ResponseEntity<?> getAllGroupsByUserId(@PathVariable int userId){
+        List<GroupChannelDTO> groupChannel = this.groupChannelService.fetchAllGroupsByUserId(userId);
+
+        if(groupChannel != null){
+            return AppResponse.success()
+                    .withData(groupChannel)
+                    .build();
+        }
+
+        return AppResponse.error()
+                .withMessage("Group Channels are not found")
                 .build();
     }
 
