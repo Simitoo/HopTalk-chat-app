@@ -1,0 +1,26 @@
+<div class="message-container">
+  <button (click)="closeChatHandler()" class="return-button">⬅ Back</button>
+    <div class="messages-area">
+      <ul>
+        <li *ngFor="let message of messages">
+          <p class="message-header">
+            <strong>{{ message.senderUsername }}</strong> - 
+            <small>{{ message.createdAt | date:'short' }}</small>
+          </p>
+          <p class="message-content">{{ message.messageContent }}</p>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="input-area">
+      <input 
+        type="text" 
+        id="messageInput" 
+        name="messageInput" 
+        [(ngModel)]="newMessage" 
+        placeholder="Type a message..."
+        class="message-input"
+      />
+      <button (click)="sendMessage()" class="send-button">Send</button>
+    </div>
+  </div>

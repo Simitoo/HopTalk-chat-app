@@ -21,6 +21,7 @@ public class MessageController {
 
     @PostMapping("/messages")
     public ResponseEntity<?> createMessage(@RequestBody Message message){
+        System.out.println("Received message: " + message);
         if(this.messageService.createMessage(message)){
             return AppResponse.success()
                     .withMessage("Message created successfully")
@@ -45,6 +46,7 @@ public class MessageController {
     public ResponseEntity<?> getGroupMessages(@PathVariable int receiverId){
         List<MessageDTO> messages = this.messageService.fetchAllForGroupChannel(receiverId);
 
+        System.out.println("Fetched messages for receiverId " + receiverId + ": " + messages);
         return AppResponse.success()
                 .withData(messages)
                 .build();

@@ -1,6 +1,6 @@
 <h3 class="group-channels-title">Group Channels</h3>
 <ul class="group-channel-list">
-    <li *ngFor="let channel of groupChannels">
+    <li *ngFor="let channel of groupChannels " (click)="selectChannel(channel)">
         <img [src]="channel.iconUrl" alt="{{channel.title}}" class="channel-icon">
         <span>{{ channel.title }}</span>
     </li>

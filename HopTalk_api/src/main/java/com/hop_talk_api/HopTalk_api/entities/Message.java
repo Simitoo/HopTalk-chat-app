@@ -36,10 +36,10 @@ public class Message {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "message_type", nullable = false)
-    private MessageType messageType;
+    private MessageType messageType = MessageType.TEXT;
 
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;

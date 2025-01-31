@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { GroupChannelService } from "../../services/GroupChannelService";
 import { GroupChannel } from "../../models/group-channel.model";
 
@@ -15,6 +15,12 @@ export class GroupChannelComponent implements OnInit {
     userId: number | null = null;
 
     constructor(private groupChannelService: GroupChannelService) {}
+
+    @Output() channelSelected = new EventEmitter<any>();
+
+    selectChannel(channel: any) {
+        this.channelSelected.emit(channel);
+    }
 
     ngOnInit(): void {
         this.fetchUserId();
@@ -46,8 +52,19 @@ export class GroupChannelComponent implements OnInit {
         }
     }
 
-    handleAction(channel: GroupChannel, action: string){
+    handleAction(channel: GroupChannel){
+        const selectedChannel = {
+            id: channel.id,
+            type: 'CHANNEL',
+            iconUrl: channel.iconUrl,
+            title: channel.title,
+            participants: channel.participantsList
+        };
 
+        localStorage.setItem('selectedChannel', JSON.stringify(selectedChannel));
+        console.log('Selected channel stored:', selectedChannel);
+
+        window.location.reload();
     }
 
 }

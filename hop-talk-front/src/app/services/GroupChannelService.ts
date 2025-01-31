@@ -18,7 +18,7 @@ export class GroupChannelService {
     getUserGroupChannels(userId: number): Observable<GroupChannel[]> {
         return this.httpClient.get<ApiResponse>(`${this.baseUrl}/groups/${userId}`)
             .pipe(
-                map((response: ApiResponse) => response.data)  // Extract the array from "data"
+                map((response: ApiResponse) => response.data)
             );
     }
 }

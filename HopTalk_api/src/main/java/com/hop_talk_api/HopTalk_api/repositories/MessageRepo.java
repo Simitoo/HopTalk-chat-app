@@ -10,10 +10,10 @@ import java.util.List;
 
 public interface MessageRepo extends JpaRepository<Message, Integer> {
 
-    @Query("SELECT m FROM Message m WHERE m.receiverId = :receiverId AND m.receiverType = 'USER' AND m.isActive = true ORDER BY m.createdAt DESC")
+    @Query("SELECT m FROM Message m WHERE m.receiverId = :receiverId AND m.receiverType = 'USER' AND m.isActive = true ORDER BY m.createdAt ASC")
     List<Message> findAllForDirectChannel(@Param("receiverId") int receiverId, Pageable pageable);
 
-    @Query("SELECT m FROM Message m WHERE m.receiverId = :receiverId AND m.receiverType = 'CHANNEL' AND m.isActive = true ORDER BY m.createdAt DESC")
+    @Query("SELECT m FROM Message m WHERE m.receiverId = :receiverId AND m.receiverType = 'CHANNEL' AND m.isActive = true ORDER BY m.createdAt ASC")
     List<Message> findAllForGroupChannel(@Param("receiverId") int receiverId, Pageable pageable);
 
     Message findMessageById(int id);
